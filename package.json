@@ -1,0 +1,52 @@
+{
+  "name": "ghibli-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techicode/ghibli-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.5",
+    "eslint-plugin-promise": "6.0.0",
+    "eslint-plugin-security": "^1.5.0",
+    "eslint-plugin-unicorn": "^43.0.2",
+    "husky": "8.0.1",
+    "lint-staged": "13.0.3",
+    "nodemon": "2.0.19",
+    "prettier": "2.7.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:unicorn/recommended",
+      "plugin:security/recommended"
+    ],
+    "rules": {
+      "unicorn/prefer-module": 0,
+      "unicorn/prevent-abbreviations": 0
+    }
+  },
+  "bugs": {
+    "url": "https://github.com/techicode/ghibli-backend/issues"
+  },
+  "homepage": "https://github.com/techicode/ghibli-backend#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
