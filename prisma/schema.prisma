@@ -13,11 +13,11 @@ datasource db {
 model Movie {
   id              Int      @id @default(autoincrement())
   title           String   @db.VarChar(100)
-  summary     String @db.VarChar()
+  summary         String @db.VarChar()
   release_date    DateTime
   duration        Int
   ranking         Int 
-  cover_img       String @db.VarChar(100)
+  cover_img       String? @db.VarChar(100)
   director Director @relation(fields: [director_id], references: [id])
   director_id     Int
   producer Producer @relation(fields: [producer_id], references: [id])
@@ -27,13 +27,13 @@ model Movie {
 model Director {
   id             Int @id @default(autoincrement())
   name           String @db.VarChar(50)
-  picture        String @db.VarChar(100)
+  picture        String? @db.VarChar(100)
   movies Movie[]
 }
 
 model Producer {
   id             Int @id @default(autoincrement())
   name           String @db.VarChar(50)
-  picture        String @db.VarChar(100)
+  picture        String? @db.VarChar(100)
   movies Movie[]
 }
