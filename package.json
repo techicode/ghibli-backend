@@ -40,7 +40,8 @@
     ],
     "rules": {
       "unicorn/prefer-module": 0,
-      "unicorn/prevent-abbreviations": 0
+      "unicorn/prevent-abbreviations": 0,
+      "unicorn/prefer-top-level-await": 0
     }
   },
   "bugs": {
