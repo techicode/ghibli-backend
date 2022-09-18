@@ -22,5 +22,23 @@ export const getProducer = async (req, res) => {
   return res.status(200).send(producer);
 };
 
+export const getMoviesFromProducer = async (req, res) => {
+  const { id } = req.params;
+  const producerId = Number.parseInt(id);
 
-// TODO response with all the movies from a single producer, example /producer/:id/movies/ 
+  // TODO fix response when the id is invalid (not a number)
+
+  const producer = await prisma.producer.findUnique({
+    where: { id: producerId },
+  });
+
+  if (!producer) return res.status(404).send({ error: 'Producer not found' });
+
+  const moviesFromProducer = await prisma.movie.findMany({
+    where: {
+      producer_id: producerId,
+    },
+  });
+
+  return res.status(200).send(moviesFromProducer);
+};
