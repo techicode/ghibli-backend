@@ -11,7 +11,9 @@ export const getAllProducers = async (req, res) => {
 export const getProducer = async (req, res) => {
   const { id } = req.params;
   const producerId = Number.parseInt(id);
-  // TODO fix response when the id is invalid (not a number)
+
+  if (Number.isNaN(producerId))
+    return res.status(400).send({ error: 'Invalid input' });
 
   const producer = await prisma.producer.findUnique({
     where: { id: producerId },
@@ -26,7 +28,8 @@ export const getMoviesFromProducer = async (req, res) => {
   const { id } = req.params;
   const producerId = Number.parseInt(id);
 
-  // TODO fix response when the id is invalid (not a number)
+  if (Number.isNaN(producerId))
+    return res.status(400).send({ error: 'Invalid input' });
 
   const producer = await prisma.producer.findUnique({
     where: { id: producerId },

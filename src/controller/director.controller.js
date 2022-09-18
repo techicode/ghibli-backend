@@ -11,7 +11,9 @@ export const getAllDirectors = async (req, res) => {
 export const getDirector = async (req, res) => {
   const { id } = req.params;
   const directorId = Number.parseInt(id);
-  // TODO fix response when the id is invalid (not a number)
+
+  if (Number.isNaN(directorId))
+    return res.status(400).send({ error: 'Invalid input' });
 
   const director = await prisma.director.findUnique({
     where: { id: directorId },
@@ -26,7 +28,8 @@ export const getMoviesFromDirector = async (req, res) => {
   const { id } = req.params;
   const directorId = Number.parseInt(id);
 
-  // TODO fix response when the id is invalid (not a number)
+  if (Number.isNaN(directorId))
+    return res.status(400).send({ error: 'Invalid input' });
 
   const director = await prisma.director.findUnique({
     where: { id: directorId },
