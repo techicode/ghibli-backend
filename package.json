@@ -27,7 +27,8 @@
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "nodemon": "2.0.19",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "prisma": "^4.3.1"
   },
   "eslintConfig": {
     "env": {
@@ -47,6 +48,7 @@
   },
   "homepage": "https://github.com/techicode/ghibli-backend#readme",
   "dependencies": {
+    "@prisma/client": "^4.3.1",
     "express": "^4.18.1"
   }
 }
