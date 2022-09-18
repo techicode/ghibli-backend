@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { numberValidator } from '../utils/number-validator.js';
 
 const prisma = new PrismaClient();
 
@@ -10,9 +11,9 @@ export const getAllProducers = async (req, res) => {
 
 export const getProducer = async (req, res) => {
   const { id } = req.params;
-  const producerId = Number.parseInt(id);
+  const producerId = numberValidator(id);
 
-  if (Number.isNaN(producerId))
+  if (typeof producerId !== 'number')
     return res.status(400).send({ error: 'Invalid input' });
 
   const producer = await prisma.producer.findUnique({
@@ -26,10 +27,9 @@ export const getProducer = async (req, res) => {
 
 export const getMoviesFromProducer = async (req, res) => {
   const { id } = req.params;
-  const producerId = Number.parseInt(id);
+  const producerId = numberValidator(id);
 
-  if (Number.isNaN(producerId))
-    return res.status(400).send({ error: 'Invalid input' });
+  if (!producerId) return res.status(400).send({ error: 'Invalid input' });
 
   const producer = await prisma.producer.findUnique({
     where: { id: producerId },

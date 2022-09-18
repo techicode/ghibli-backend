@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { numberValidator } from '../utils/number-validator.js';
 
 const prisma = new PrismaClient();
 
@@ -10,9 +11,9 @@ export const getAllDirectors = async (req, res) => {
 
 export const getDirector = async (req, res) => {
   const { id } = req.params;
-  const directorId = Number.parseInt(id);
+  const directorId = numberValidator(id);
 
-  if (Number.isNaN(directorId))
+  if (typeof directorId !== 'number')
     return res.status(400).send({ error: 'Invalid input' });
 
   const director = await prisma.director.findUnique({
@@ -26,10 +27,9 @@ export const getDirector = async (req, res) => {
 
 export const getMoviesFromDirector = async (req, res) => {
   const { id } = req.params;
-  const directorId = Number.parseInt(id);
+  const directorId = numberValidator(id);
 
-  if (Number.isNaN(directorId))
-    return res.status(400).send({ error: 'Invalid input' });
+  if (!directorId) return res.status(400).send({ error: 'Invalid input' });
 
   const director = await prisma.director.findUnique({
     where: { id: directorId },

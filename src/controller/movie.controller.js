@@ -1,8 +1,10 @@
 import { PrismaClient } from '@prisma/client';
+import { numberValidator } from '../utils/number-validator.js';
 
 const prisma = new PrismaClient();
 
 export const getAllMovies = async (req, res) => {
+  //TODO -> pagination, too many results
   const movies = await prisma.movie.findMany({
     include: {
       director: {
@@ -23,9 +25,9 @@ export const getAllMovies = async (req, res) => {
 
 export const getSingleMovie = async (req, res) => {
   const { id } = req.params;
-  const idMovie = Number.parseInt(id);
+  const idMovie = numberValidator(id);
 
-  if (Number.isNaN(idMovie))
+  if (typeof idMovie !== 'number')
     return res.status(400).send({ error: 'Invalid input' });
 
   const movies = await prisma.movie.findUnique({
