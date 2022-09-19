@@ -17,8 +17,13 @@ This a simple API REST app with basic information about movies from studio ghibl
 
 ## Configure postgres database
 
+    DATABASE_URL="postgresql://username:password@localhost:5432/databasename?schema=schemaname"
+
     make a copy of .env-example and rename it to .env
-    change the options using your username and password
+    change the options using your username and password, also the database name and schema name
+  
+## Import database
+    psql -U USERNAME DBNAME < dbexport.pgsql
 
 ## Run the app
 
