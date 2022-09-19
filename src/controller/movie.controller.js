@@ -4,7 +4,13 @@ import { numberValidator } from '../utils/number-validator.js';
 const prisma = new PrismaClient();
 
 export const getAllMovies = async (req, res) => {
-  //TODO -> pagination, too many results
+  const page = numberValidator(req.query.page) || 0;
+
+  const skip = page === 0 ? 0 : (page - 1) * 5;
+
+  if (skip < 0)
+    return res.status(400).send({ error: `page can't be a negative number` });
+
   const movies = await prisma.movie.findMany({
     include: {
       director: {
@@ -18,7 +24,12 @@ export const getAllMovies = async (req, res) => {
         },
       },
     },
+    skip: skip,
+    take: 5,
   });
+
+  if (movies.length === 0)
+    return res.status(400).send({ error: 'page out of bounds' });
 
   return res.status(200).send(movies);
 };
