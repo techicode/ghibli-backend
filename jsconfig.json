@@ -2,9 +2,5 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
       "module": "Node16",
-      "baseUrl": "./",
-      "paths": {
-          "#Lib/*": ["./src/lib/*"]
-      }
   }
 }
