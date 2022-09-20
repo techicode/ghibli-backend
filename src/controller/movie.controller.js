@@ -6,26 +6,20 @@ const prisma = new PrismaClient();
 export const getAllMovies = async (req, res) => {
   const page = numberValidator(req.query.page) || 0;
 
-  const skip = page === 0 ? 0 : (page - 1) * 5;
+  const RESULTS_ITEMS = 4;
+
+  const skip = page === 0 ? 0 : (page - 1) * RESULTS_ITEMS;
 
   if (skip < 0)
     return res.status(400).send({ error: `page can't be a negative number` });
 
   const movies = await prisma.movie.findMany({
     include: {
-      director: {
-        select: {
-          name: true,
-        },
-      },
-      producer: {
-        select: {
-          name: true,
-        },
-      },
+      director: true,
+      producer: true,
     },
     skip: skip,
-    take: 5,
+    take: RESULTS_ITEMS,
   });
 
   if (movies.length === 0)
