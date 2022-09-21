@@ -41,7 +41,8 @@
     "rules": {
       "unicorn/prefer-module": 0,
       "unicorn/prevent-abbreviations": 0,
-      "unicorn/prefer-top-level-await": 0
+      "unicorn/prefer-top-level-await": 0,
+      "unicorn/no-process-exit": 0
     }
   },
   "bugs": {
