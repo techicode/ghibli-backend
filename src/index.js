@@ -35,7 +35,7 @@ try {
   }
 }
 
-
+// block all the methods except GET
 app.use('*', (req, res, next) => {
   if (!ALLOWED_METHODS.has(req.method)) {
     return res.status(405).send('Method Not Allowed');
@@ -44,6 +44,7 @@ app.use('*', (req, res, next) => {
   return next();
 });
 
+// routes for the endpoints
 app.use('/movies', movieRouter);
 app.use('/directors', directorRouter);
 app.use('/producers', producerRouter);
