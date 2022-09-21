@@ -5,9 +5,17 @@ const prisma = new PrismaClient();
 
 // returns all the producers
 export const getAllProducers = async (req, res) => {
-  const producers = await prisma.producer.findMany();
+  try {
+    const producers = await prisma.producer.findMany();
 
-  return res.status(200).send(producers);
+    return res.status(200).send(producers);
+  } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error,
+    });
+    return res.status(500).send({ error: 'Database error' });
+  }
 };
 
 // return an specific producers by the request id param
@@ -15,11 +23,10 @@ export const getProducer = async (req, res) => {
   const { id } = req.params;
   const producerId = numberValidator(id);
 
-    // check if the given id is a valid number
+  // check if the given id is a valid number
   if (typeof producerId !== 'number')
     return res.status(400).send({ error: 'Invalid input' });
 
-    
   const producer = await prisma.producer.findUnique({
     where: { id: producerId },
   });
@@ -38,7 +45,7 @@ export const getMoviesFromProducer = async (req, res) => {
   // check if the given id is a valid number
   if (!producerId) return res.status(400).send({ error: 'Invalid input' });
 
-    // find a producer with and id, this is to validate if the producer exists
+  // find a producer with and id, this is to validate if the producer exists
   const producer = await prisma.producer.findUnique({
     where: { id: producerId },
   });
