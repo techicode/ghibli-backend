@@ -50,5 +50,5 @@ app.use('/directors', directorRouter);
 app.use('/producers', producerRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Ghibli API listening on port ${port}`);
 });
