@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 
+import { PrismaClient } from '@prisma/client';
+import { PrismaClientInitializationError } from '@prisma/client/runtime/index.js';
+
 import { ALLOWED_METHODS } from './constants/allowed-methods.js';
 import { LIMITER_OPTIONS } from './constants/limiter.js';
 import { directorRouter } from './routes/director.routes.js';
@@ -10,12 +13,28 @@ import { producerRouter } from './routes/producer.routes.js';
 const app = express();
 const port = 3000;
 
-app.use(cors())
+const prisma = new PrismaClient();
+
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Apply the rate limiting middleware to all requests
 // app.use(LIMITER_OPTIONS);
+
+// check connection with the db
+try {
+  await prisma.$connect();
+} catch (error) {
+  if (error instanceof PrismaClientInitializationError) {
+    console.log('Failed to connect to the database');
+    console.log('Check if postgres service is up, then run again the server');
+    process.exit();
+  } else {
+    console.log('Unexpected error');
+  }
+}
+
 
 app.use('*', (req, res, next) => {
   if (!ALLOWED_METHODS.has(req.method)) {
