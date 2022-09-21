@@ -44,6 +44,9 @@ app.use('*', (req, res, next) => {
   return next();
 });
 
+// static server for images
+app.use('/static', express.static('public'));
+
 // routes for the endpoints
 app.use('/movies', movieRouter);
 app.use('/directors', directorRouter);
