@@ -1,5 +1,6 @@
 import { test, expect } from 'vitest';
-import { numberValidator } from '../utils/number-validator.js';
+import { numberValidator } from '../src/utils/number-validator.js';
+
 
 test('should return a string as a number', () => {
   const string = '123';
