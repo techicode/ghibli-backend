@@ -74,6 +74,8 @@ export const getSingleMovie = async (req, res) => {
 
     // if there's no movie, return 404
     if (!movies) return res.status(404).send({ error: 'Movie not found' });
+
+    return res.status(200).send(movies);
   } catch (error) {
     logger.log({
       level: 'error',
@@ -81,6 +83,4 @@ export const getSingleMovie = async (req, res) => {
     });
     return res.status(500).send({ error: 'Database error' });
   }
-
-  return res.status(200).send(movies);
 };
