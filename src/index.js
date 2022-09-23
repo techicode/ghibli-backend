@@ -55,3 +55,5 @@ app.use('/producers', producerRouter);
 app.listen(port, () => {
   console.log(`Ghibli API listening on port ${port}`);
 });
+
+export default app;
