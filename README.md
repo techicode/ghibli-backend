@@ -9,21 +9,26 @@ This a simple API REST app with basic information about movies from studio ghibl
 - [Express JS](https://expressjs.com/)
 - [Postgres](https://www.postgresql.org/)
 - [Prisma](https://www.prisma.io/)
+- [Vitest](https://vitest.dev/)
 
 # 🚀 Instalation and running process
 ## Install
 
     npm install
 
-## Configure postgres database
+## Configure .env for the db connection
 
-    DATABASE_URL="postgresql://username:password@localhost:5432/databasename?schema=schemaname"
+    DATABASE_URL="postgresql://admin:password@localhost:5432/api?schema=ghibli"
 
     make a copy of .env-example and rename it to .env
-    change the options using your username and password, also the database name and schema name
+    change the password to the password of your db
+
+    *there's a problem with the script, so right now can be used only with the usern admin
   
 ## Import database
-    psql -U USERNAME DBNAME < dbexport.pgsql
+download the script from [here](https://github.com/techicode/ghibli-db/blob/main/ghibli-db.pgsql)
+
+    psql -U admin DBNAME < ghibli-db.pgsql
 
 ## Run the app
 
@@ -189,6 +194,8 @@ This a simple API REST app with basic information about movies from studio ghibl
 
 ## TO DO
 - [ ] Improve documentation  
-- [ ] Add to the github repo the database script with all the data
-- [ ] Implement a image server in the same server for movies/producers/director pictures
-- [ ] More 🤓
+- [x] Add to the github repo the database script with all the data
+- [x] Implement a image server in the same server for movies/producers/director pictures
+- [ ] Look for a better option to import the db
+- [ ] Testing for the endpoints
+
