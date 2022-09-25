@@ -27,6 +27,9 @@ export const getAllMovies = async (req, res) => {
       },
       skip: skip,
       take: RESULTS_ITEMS,
+      orderBy: {
+        release_date: 'asc',
+      },
     });
 
     // if the array comes empty, that mean the give page is out of bounds
